@@ -1,0 +1,36 @@
+[project]
+name = "image-text-embedding"
+version = "0.1.0"
+description = "Playing with models for embedding images and text"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.5.1", "torchvision>=0.20.1"]
+
+
+[dependency-groups]
+dev = ["pre-commit>=4.0.1", "pyright>=1.1.391", "ruff>=0.8.4"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "platform_system != 'Darwin'" }]
+torchvision = [
+    { index = "pytorch-cpu", marker = "platform_system != 'Darwin'" },
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.format]
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["FBT001", "FBT002", "UP035", "D"]
+
+[tool.pyright]
+venvPath = "."
+venv = "venv"
