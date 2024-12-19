@@ -42,7 +42,9 @@ Jina initially focused on developing text embeding models with retrieval as a pr
 
 The Jina CLIP v2 paper covers their approach to training a high-quality embedding model with a focus on search. In particular, this technical report serves as a good demonstration of different standardized evaluations.
 
+Looking at evaluation datasets, Jina CLIP v2 uses MTEB retrieval and STS tasks for text-to-text embedding operations, while relying on several different image-text datasets for image-to-text (I-T) and text-to-image (T-I) retrieval quality assessment. In particular, [Flicker30k](https://huggingface.co/datasets/nlphuji/flickr30k?row=12) looks like it has slightly more detailed captions which could be used as complicated queries (e.g. "A black dog and a white dog with brown spots are staring at each other in the street" and "Man wearing a blue and white outfit, holding a broom, with a traditional Asian architecture in the background"), while [MS COCO Captions](https://huggingface.co/datasets/sentence-transformers/coco-captions?row=47) appears more simplistic (e.g. "A kitchen has red bricks lining the counter" and "A man getting ready to surf as lookers walk by"). 
 
+**Conclusion:** For now let's look at Flickr30k captions as queries, but for retrieval evaluation we should include more that 30k example images to make retrieval more difficult. Idea: Embed and cluster Flicker30k, then create a subsample of the data which focuses on semantically similar topics, then expand with additional hard-negative images to create a tougher search evaluation.
 
 ## Dev setup
 
