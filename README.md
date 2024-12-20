@@ -4,7 +4,7 @@ The core idea of this project is to create a difficult evaluation for image sear
 
 ## The eval dataset -- Flickr Vehicles
 
-We do this by using a pretrained Imagenet1k classifier to identify a subset of the Flickr30k dataset that likely contains some kind of imagenet vehicle class as a prominent feature of the image, and then we augment our data with Imagenet1k data from vehicle classes. We also downsize the images to make the eval smaller (160px in the smallest dimension).
+We begin the creation of our evaluation challenged by using a pretrained Imagenet1k classifier to identify a subset of the Flickr30k dataset that likely contains some kind of imagenet vehicle class as a prominent feature of the image. We then augment this ~2k-image subset with Imagenet1k data from vehicle classes. We also downsize the images to make the eval smaller (160px in the smallest dimension).
 
 In the end, we end up with a large set of images (68k) which take up less than 1G of disk space (720M) and are paired with just over 10k queries (which pertain to only a subset of ~2k images from the Flickr30k dataset).
 
