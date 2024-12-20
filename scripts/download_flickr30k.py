@@ -22,35 +22,11 @@ def download_file(
 ) -> Path:
     dest_dir.mkdir(exist_ok=True, parents=True)
     dest_path = dest_dir / Path(urlparse(url).path).name
-    res = requests.head(url, timeout=request_timeout)
-    file_size_online = int(res.headers.get("content-length", -1))
-    if dest_path.exists():
-        file_size_offline = dest_path.stat().st_size
-        if file_size_online == file_size_offline:
-            log(f"Complete file {dest_path} exists. Skiping download.")
-            return dest_path
-        log(f"File {dest_path} is incomplete. Resuming download...")
-        start_position = file_size_offline
-    else:
-        log(f"Downloading file to {dest_path}...")
-        start_position = 0
-    resume_header = (
-        {"Range": f"bytes={start_position}-"} if start_position > 0 else None
-    )
-    res = requests.get(url, stream=True, headers=resume_header, timeout=request_timeout)
-    file_mode = "ab" if start_position > 0 else "wb"
+    log(f"Downloading file to {dest_path}...")
+    res = requests.get(url, stream=True, timeout=request_timeout)
     with (
-        dest_path.open(file_mode) as f,
-        tqdm(
-            total=None if file_size_online == -1 else file_size_online,
-            unit="B",
-            unit_scale=True,
-            unit_divisor=1024,
-            desc=dest_path.name,
-            initial=start_position,
-            ascii=True,
-            miniters=1,
-        ) as pbar,
+        dest_path.open("wb") as f,
+        tqdm(unit="B", unit_scale=True, unit_divisor=1024, desc=dest_path.name) as pbar,
     ):
         for chunk in res.iter_content(block_size):
             f.write(chunk)
@@ -59,16 +35,21 @@ def download_file(
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
+
+    # Set up output directory.
     assert len(sys.argv) == 2, "Require exactly one input arg (output dir path)"
     out_path = Path(sys.argv[1])
     out_path.mkdir(exist_ok=True, parents=True)
 
+    # Downloads.
     log("Downloading annotations CSV")
     csv_path = download_file(url=CSV_URL, dest_dir=out_path)
     log(f"Annotations CSV is not in {csv_path}")
-
     log("Downloading images zip file")
     zip_path = download_file(url=ZIP_URL, dest_dir=out_path)
+
+    # Unzip images.
     log("Unzipping images")
     with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(out_path)
