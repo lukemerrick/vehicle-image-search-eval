@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Playing with models for embedding images and text"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["torch>=2.5.1", "torchvision>=0.20.1"]
+dependencies = [
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "tqdm>=4.67.1",
+]
 
 
 [dependency-groups]
