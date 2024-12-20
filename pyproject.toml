@@ -29,7 +29,16 @@ skip-magic-trailing-comma = true
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["FBT001", "FBT002", "UP035", "D"]
+ignore = [
+    "FBT001",
+    "FBT002",
+    "UP035",
+    "D",
+    "S101",
+    "PLR2004",
+    "COM812",
+    "ISC001",
+]
 
 [tool.pyright]
 venvPath = "."
