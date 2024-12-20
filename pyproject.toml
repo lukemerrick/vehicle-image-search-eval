@@ -5,9 +5,12 @@ description = "Playing with models for embedding images and text"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "numpy>=2.2.0",
+    "pillow>=11.0.0",
     "torch>=2.5.1",
     "torchvision>=0.20.1",
     "tqdm>=4.67.1",
+    "transformers>=4.47.1",
 ]
 
 
@@ -46,4 +49,4 @@ ignore = [
 
 [tool.pyright]
 venvPath = "."
-venv = "venv"
+venv = ".venv"
