@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # Downloads.
     log("Downloading annotations CSV")
     csv_path = download_file(url=CSV_URL, dest_dir=out_path)
-    log(f"Annotations CSV is not in {csv_path}")
+    log(f"Annotations CSV is now in {csv_path}")
     log("Downloading images zip file")
     zip_path = download_file(url=ZIP_URL, dest_dir=out_path)
 

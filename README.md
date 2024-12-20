@@ -1,3 +1,25 @@
+# Project: Evaluate Image Search
+
+The core idea of this project is to create a difficult evaluation for image search. We use 
+
+## Creating the evaluation data
+
+```shell
+# Download Flickr30k.
+python scripts/download_flirk30k.py ./flickr30k
+
+# Extract vehicle images and captions as a retrieval benchmark.
+PYTHONPATH=. python scripts/find_and_resize_flickr30k_vehicle_images.py ./flickr30k ./vehicle_image_search
+
+# Authenticate with HuggingFace to download Imagenet1k.
+# (Note, you must also accept the terms at https://huggingface.co/datasets/ILSVRC/imagenet-1k)
+huggingface-cli login
+
+# Add all vehicle images from Imagenet1k training and validation splits to make search harder.
+PYTHONPATH=. python scripts/download_and_resize_imagenet1k_vehicles.py ./vehicle_image_search/images
+```
+
+
 ## Literature skim (lit review)
 
 
