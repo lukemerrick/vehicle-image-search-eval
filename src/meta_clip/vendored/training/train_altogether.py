@@ -15,13 +15,13 @@ from collections import defaultdict
 
 from transformers import AutoTokenizer
 
-from src.open_clip.transform import get_mean_std
-from src.open_clip.tokenizer import tokenize as clip_tokenizer
-from src.training.distributed import is_master, world_info_from_env
-from src.training.zero_shot import zero_shot_eval
-from src.training.precision import get_autocast
-from src.training.train import to_device, images_to_device, backward, AverageMeter
-from src.training.checkpoint import unwrap_model, save_checkpoint, agg_positions, collect_positions
+from src.meta_clip.vendored.open_clip.transform import get_mean_std
+from src.meta_clip.vendored.open_clip.tokenizer import tokenize as clip_tokenizer
+from src.meta_clip.vendored.training.distributed import is_master, world_info_from_env
+from src.meta_clip.vendored.training.zero_shot import zero_shot_eval
+from src.meta_clip.vendored.training.precision import get_autocast
+from src.meta_clip.vendored.training.train import to_device, images_to_device, backward, AverageMeter
+from src.meta_clip.vendored.training.checkpoint import unwrap_model, save_checkpoint, agg_positions, collect_positions
 
 
 def create_captioner(args, model, device):
@@ -32,7 +32,7 @@ def create_captioner(args, model, device):
     import importlib  # TODO: wrap as a file search func.
     for model_code in os.listdir(f"src/open_clip"):
         if model_code.endswith(".py") and "model" in model_code:
-            module = importlib.import_module("src.open_clip." + model_code[:-len(".py")])
+            module = importlib.import_module("src.meta_clip.vendored.open_clip." + model_code[:-len(".py")])
             if hasattr(module, args.cap_model):
                 model_cls = getattr(module, args.cap_model)
                 break

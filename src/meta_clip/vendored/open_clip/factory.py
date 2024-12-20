@@ -11,12 +11,12 @@ from typing import Optional, Tuple
 
 import torch
 
-from src.open_clip import model as model_zoo
-from src.open_clip.model import CLIP, convert_weights_to_fp16, resize_pos_embed
-from src.open_clip.openai import load_openai_model
-from src.open_clip.pretrained import get_pretrained_url, download_pretrained
-from src.open_clip.transform import image_transform
-from src.training.checkpoint import load_checkpoint
+from src.meta_clip.vendored.open_clip import model as model_zoo
+from src.meta_clip.vendored.open_clip.model import CLIP, convert_weights_to_fp16, resize_pos_embed
+from src.meta_clip.vendored.open_clip.openai import load_openai_model
+from src.meta_clip.vendored.open_clip.pretrained import get_pretrained_url, download_pretrained
+from src.meta_clip.vendored.open_clip.transform import image_transform
+from src.meta_clip.vendored.training.checkpoint import load_checkpoint
 
 
 _MODEL_CONFIG_PATHS = [Path(__file__).parent / f"model_configs/"]
@@ -92,7 +92,7 @@ def create_model(
         for model_code in os.listdir(f"src/open_clip"):
             if not model_code.endswith("model.py"):
                 continue
-            module_name = "src.open_clip." + model_code[:-len(".py")]
+            module_name = "src.meta_clip.vendored.open_clip." + model_code[:-len(".py")]
             module = importlib.import_module(module_name)
             if hasattr(module, clip_model):
                 model_cls = getattr(module, clip_model)

@@ -16,9 +16,9 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 
-from src.open_clip.tokenizer import tokenize
-from src.training.distributed import world_info_from_env
-from src.training.data import DataInfo
+from src.meta_clip.vendored.open_clip.tokenizer import tokenize
+from src.meta_clip.vendored.training.distributed import world_info_from_env
+from src.meta_clip.vendored.training.data import DataInfo
 
 
 class Altogether_PT(torch.utils.data.IterableDataset):
@@ -47,7 +47,7 @@ class Altogether_PT(torch.utils.data.IterableDataset):
 
         import torchvision.transforms.functional as F
 
-        from src.open_clip.transform import _convert_to_rgb
+        from src.meta_clip.vendored.open_clip.transform import _convert_to_rgb
         from torchvision.transforms import Normalize, Compose, RandomResizedCrop, InterpolationMode, ToTensor, Resize, CenterCrop
 
         self.transform = Compose([

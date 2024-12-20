@@ -16,7 +16,7 @@ import torch.nn.functional as F
 from torch import nn
 from torch.utils.checkpoint import checkpoint
 
-from src.open_clip.utils import freeze_batch_norm_2d, to_2tuple
+from src.meta_clip.vendored.open_clip.utils import freeze_batch_norm_2d, to_2tuple
 
 
 class Bottleneck(nn.Module):

@@ -22,15 +22,15 @@ except ImportError:
     tensorboard = None
 
 
-from src.open_clip.factory import create_model_and_transforms
-from src.open_clip.transform import get_mean_std
-from src.open_clip.model import CLIP, VisualTransformer, Transformer, ResidualAttentionBlock
-from src.training.data import get_data
-from src.training.distributed import is_master, init_distributed_device, world_info_from_env
-from src.training.logger import setup_logging
-from src.training.scheduler import cosine_lr
-from src.training import train
-from src.training.checkpoint import load_checkpoint, unwrap_model
+from src.meta_clip.vendored.open_clip.factory import create_model_and_transforms
+from src.meta_clip.vendored.open_clip.transform import get_mean_std
+from src.meta_clip.vendored.open_clip.model import CLIP, VisualTransformer, Transformer, ResidualAttentionBlock
+from src.meta_clip.vendored.training.data import get_data
+from src.meta_clip.vendored.training.distributed import is_master, init_distributed_device, world_info_from_env
+from src.meta_clip.vendored.training.logger import setup_logging
+from src.meta_clip.vendored.training.scheduler import cosine_lr
+from src.meta_clip.vendored.training import train
+from src.meta_clip.vendored.training.checkpoint import load_checkpoint, unwrap_model
 
 
 def random_seed(seed=42, rank=0):
@@ -120,7 +120,7 @@ def main(args):
     )
 
     if hasattr(args, "cap_model"):
-        from src.training.train_altogether import create_captioner
+        from src.meta_clip.vendored.training.train_altogether import create_captioner
         clip_model, model = create_captioner(args, model, device)
         composed_model = clip_model, model
 
@@ -215,8 +215,8 @@ def main(args):
 
     if 'train' not in data or hasattr(args, "eval") and args.eval:  # huxu: merge native/SLIP eval.
         # TODO: move to below first.
-        from src.training.slip_evaluate import slip_evaluate
-        from src.open_clip.tokenizer import tokenize
+        from src.meta_clip.vendored.training.slip_evaluate import slip_evaluate
+        from src.meta_clip.vendored.open_clip.tokenizer import tokenize
         # in case a downloaded model.
         os.makedirs(args.output_dir, exist_ok=True)
         slip_evaluate(args, model, preprocess_val, tokenize)
@@ -229,7 +229,7 @@ def main(args):
         import importlib
         for model_code in os.listdir(f"src/training"):
             if model_code.startswith("train"):
-                module = importlib.import_module("src.training." + model_code[:-len(".py")])
+                module = importlib.import_module("src.meta_clip.vendored.training." + model_code[:-len(".py")])
                 if hasattr(module, engine):
                     engine_cls = getattr(module, engine)
                     break
@@ -246,8 +246,8 @@ def main(args):
 
     
     if hasattr(args, "eval") and args.eval and any(v in data for v in ('val', 'imagenet-val', 'imagenet-v2')):
-        from src.training.slip_evaluate import slip_evaluate
-        from src.open_clip import tokenize
+        from src.meta_clip.vendored.training.slip_evaluate import slip_evaluate
+        from src.meta_clip.vendored.open_clip import tokenize
 
         slip_evaluate(args, model, preprocess_val, tokenize)
 

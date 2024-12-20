@@ -74,13 +74,13 @@ def get_imagenet(args, preprocess_fns, split):
 
 def get_metaclip_dataset(args, preprocess_fn, is_train, positions=None):
     # a switcher func for different versions of dataloader.
-    from src.training.metaclip_wds import get_metaclip_iter_wds_dataset
+    from src.meta_clip.vendored.training.metaclip_wds import get_metaclip_iter_wds_dataset
     return get_metaclip_iter_wds_dataset(args, preprocess_fn, is_train, positions)
 
 
 def get_mode_dataset(args, preprocess_fn, is_train, positions=None):
     # a switcher func for different versions of dataloader.
-    from src.training.mode_wds import get_mode_iter_wds_dataset
+    from src.meta_clip.vendored.training.mode_wds import get_mode_iter_wds_dataset
     return get_mode_iter_wds_dataset(args, preprocess_fn, is_train, positions)
 
 
@@ -90,7 +90,7 @@ def get_dataset(args, preprocess_fn, is_train, positions=None):
         if data_code == "data.py":
             continue
         if "data" in data_code:
-            module = importlib.import_module("src.training." + data_code[:-len(".py")])
+            module = importlib.import_module("src.meta_clip.vendored.training." + data_code[:-len(".py")])
             if hasattr(module, args.dataset_cls):
                 dataset_cls = getattr(module, args.dataset_cls)
                 break
@@ -132,7 +132,7 @@ def get_endsft_dataset(args, preprocess_fn, is_train, positions=None):
         if data_code == "data.py":
             continue
         if "data" in data_code:
-            module = importlib.import_module("src.training." + data_code[:-len(".py")])
+            module = importlib.import_module("src.meta_clip.vendored.training." + data_code[:-len(".py")])
             if hasattr(module, args.endsft_dataset_cls):
                 dataset_cls = getattr(module, args.endsft_dataset_cls)
                 break

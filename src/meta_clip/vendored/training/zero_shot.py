@@ -6,9 +6,9 @@ import torch.nn.functional as F
 
 from tqdm import tqdm
 
-from src.open_clip.tokenizer import tokenize
-from src.training.imagenet_zeroshot_data import imagenet_classnames, openai_imagenet_template
-from src.training.precision import get_autocast
+from src.meta_clip.vendored.open_clip.tokenizer import tokenize
+from src.meta_clip.vendored.training.imagenet_zeroshot_data import imagenet_classnames, openai_imagenet_template
+from src.meta_clip.vendored.training.precision import get_autocast
 
 
 def zero_shot_classifier(args, model, classnames, templates):

@@ -19,11 +19,11 @@ from torchvision.transforms import Normalize, Compose, RandomResizedCrop, Interp
 
 from PIL import Image
 
-from src.open_clip.tokenizer import tokenize
+from src.meta_clip.vendored.open_clip.tokenizer import tokenize
 
-from src.training.distributed import world_info_from_env
-from src.training.data import DataInfo
-from src.open_clip.transform import _convert_to_rgb
+from src.meta_clip.vendored.training.distributed import world_info_from_env
+from src.meta_clip.vendored.training.data import DataInfo
+from src.meta_clip.vendored.open_clip.transform import _convert_to_rgb
 
 
 def pad_tokens(tokens: int, prefix_length, pad_token_id, max_seq_len = 77):
@@ -104,7 +104,7 @@ class Altogether_FT(torch.utils.data.IterableDataset):
 
         with Image.open(rec["img_path"]) as img:
             image = img.convert("RGB")
-            from src.training.fb import fairblurbbox
+            from src.meta_clip.vendored.training.fb import fairblurbbox
             image = fairblurbbox(image, rec["face_bbox"])
 
             image = self.transform(image)

@@ -3,7 +3,7 @@
 import torch
 import logging
 
-from src.open_clip.model import resize_pos_embed as _resize_pos_embed
+from src.meta_clip.vendored.open_clip.model import resize_pos_embed as _resize_pos_embed
 
 
 def unwrap_model(model):
@@ -78,7 +78,7 @@ def collect_positions(args, positions):
         return None
     if args.distributed:
         import torch.distributed as dist
-        from src.training.distributed import world_info_from_env
+        from src.meta_clip.vendored.training.distributed import world_info_from_env
 
         _, _, world_size = world_info_from_env()
 
