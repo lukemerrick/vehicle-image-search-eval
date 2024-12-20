@@ -12,7 +12,7 @@ In the end, we end up with a large set of images (68k) which take up less than 1
 
 ```shell
 # Download Flickr30k.
-PYTHONPATH=. python scripts/download_flirk30k.py ./flickr30k
+PYTHONPATH=. python scripts/download_flickr30k.py ./flickr30k
 
 # Extract vehicle images and captions as a retrieval benchmark.
 PYTHONPATH=. python scripts/find_and_resize_flickr30k_vehicle_images.py ./flickr30k ./vehicle_image_search
