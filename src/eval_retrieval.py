@@ -1,12 +1,38 @@
 import logging
+from typing import Any, Sequence
 
+import numpy as np
 import pytrec_eval
+import torch
+from numpy.typing import NDArray
+
+FloatNDArray = NDArray[np.floating[Any]]
 
 logger = logging.getLogger(__name__)
 
 
 def log(msg: str) -> None:
     logger.info(msg)
+
+
+def dense_retrieval_run(
+    emb_queries: FloatNDArray,
+    emb_docs: FloatNDArray,
+    query_ids: Sequence[str],
+    doc_ids: Sequence[str],
+    depth: int = 100,
+) -> dict[str, dict[str, float]]:
+    scores = emb_queries @ emb_docs.T
+    topk = torch.topk(torch.tensor(scores), depth, dim=1)
+    run = {}
+    for i, qid in enumerate(query_ids):
+        run[qid] = {
+            doc_ids[idx]: val
+            for idx, val in zip(
+                topk.indices[i].tolist(), topk.values[i].tolist(), strict=True
+            )
+        }
+    return run
 
 
 def evaluate_retrieval(
