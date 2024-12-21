@@ -64,7 +64,7 @@ The FAIR team behind the Altogether-FT dataset uses it to finetune a image-embed
 
 As indicated by the name, this work demonstrates how to create a high-quality contrastive image-language dataset by leveraging image metadata. They show that balancing over the metadata distribution drives a massive boost in model quality equivalent to dramatically longer training runs on unbalanced data. The original CLIP dataset balances a 400M-pair dataset into 500k groups via looking at image metadata containing one of 500k different query terms mined from Wikipedia bigram frequency, Wikipedia article titles, etc.
 
-The key benefit here is removing a massive fat tail of metadata topics, e.g. only 20k examples with metadata indicating the word "photo" are kept out the 54M-example subset of the 400M examples that contain this word.
+The key benefit here is removing a massive fat tail of metadata topics, e.g. only 20k examples with metadata indicating the word "photo" are kept out the 54M-examples originally collected with metadata that contain this word.
 
 
 #### MetaCLIP overall
