@@ -1,3 +1,7 @@
+# Large binary items
+*.npy
+vehicle_image_search/images/*.jpg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
