@@ -413,7 +413,9 @@ dependencies = [
     { name = "datasets" },
     { name = "ftfy" },
     { name = "numpy" },
+    { name = "packaging" },
     { name = "pillow" },
+    { name = "pytrec-eval" },
     { name = "torch", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_system == 'Darwin'" },
     { name = "torch", version = "2.5.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "platform_system != 'Darwin'" },
     { name = "torchvision", version = "0.20.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_system == 'Darwin'" },
@@ -434,7 +436,9 @@ requires-dist = [
     { name = "datasets", specifier = ">=3.2.0" },
     { name = "ftfy", specifier = ">=6.3.1" },
     { name = "numpy", specifier = ">=2.2.0" },
+    { name = "packaging", specifier = ">=24.2" },
     { name = "pillow", specifier = "==10.4.0" },
+    { name = "pytrec-eval", specifier = ">=0.5" },
     { name = "torch", marker = "platform_system != 'Darwin'", specifier = ">=2.5.1", index = "https://download.pytorch.org/whl/cpu" },
     { name = "torch", marker = "platform_system == 'Darwin'", specifier = ">=2.5.1" },
     { name = "torchvision", marker = "platform_system != 'Darwin'", specifier = ">=0.20.1", index = "https://download.pytorch.org/whl/cpu" },
@@ -979,6 +983,12 @@ sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl", hash = "sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427", size = 229892 },
 ]
+
+[[package]]
+name = "pytrec-eval"
+version = "0.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/2e/03/e6e84df6a7c1265579ab26bbe30ff7f8c22745aa77e0799bba471c0a3a19/pytrec_eval-0.5.tar.gz", hash = "sha256:d9eb4616e7d6b73bf1b5ba4c2c4916e88124e790b53fd61610c30158999e7bde", size = 15248 }
 
 [[package]]
 name = "pytz"
