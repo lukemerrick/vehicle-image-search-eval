@@ -8,6 +8,15 @@ We begin the creation of our evaluation challenged by using a pretrained Imagene
 
 In the end, we end up with a large set of images (68k) which take up less than 1G of disk space (720M) and are paired with just over 10k queries (which pertain to only a subset of ~2k images from the Flickr30k dataset). By focusing on one domain, we hope to replicate "one in a million" image search without actually requiring a million image embeddings per evaluation (which is costly).
 
+## Results
+
+|         |   MetaCLIP 1.2 |   Jina CLIP v2 |
+|:--------|---------------:|---------------:|
+| NDCG@10 |          0.511 |          0.384 |
+| MAP@10  |          0.467 |          0.340 |
+| R@10    |          0.651 |          0.527 |
+| P@10    |          0.065 |          0.053 |
+
 ## Creating the evaluation data
 
 ```shell
